@@ -6,6 +6,10 @@ app.get('/', (req, res) => {
   res.send('This is working!');
 })
 
+app.post('/signIn', (req, res) => {
+  res.send('signing in...');
+})
+
 app.listen(3000, () => {
   console.log('app is running on port 3000');
 });

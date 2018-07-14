@@ -2,6 +2,27 @@ const express = require('express');
 
 const app = express();
 
+const database = {
+  users: [
+    {
+      id: '001',
+      name: 'John',
+      email: 'john@gmail.com',
+      password: '0000',
+      entries: 0,
+      joined: new Date()
+    },
+    {
+      id: '002',
+      name: 'Doe',
+      email: 'doe@gmail.com',
+      password: '0001',
+      entries: 0,
+      joined: new Date()
+    }
+  ]
+}
+
 app.get('/', (req, res) => {
   res.send('This is working!');
 })

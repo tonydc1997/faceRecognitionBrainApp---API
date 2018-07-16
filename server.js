@@ -39,6 +39,10 @@ app.post('/signIn', (req, res) => {
     }
 })
 
+app.post('./register', (req, res) => {
+  
+})
+
 app.listen(3000, () => {
   console.log('app is running on port 3000');
 });

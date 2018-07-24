@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex');
 
-knex({
+const postgres = knex({
   client: 'pg',
   connection: {
     host : '127.0.0.1',
@@ -12,6 +12,8 @@ knex({
     database : 'smart-brain'
   }
 });
+
+console.log(postgres.select('*').from('users'));
 
 const app = express();
 

@@ -69,13 +69,13 @@ app.post('/register', (req, res) => {
 
 app.get('/profile/:id', (req, res) => {
   const { id } = req.params;
-  let found = false;
-  db.select('*').from('users').then(user => {
-    console.log(user);
+  db.select('*').from('users').where({id})
+    .then(user => {
+    res.json(user[0]);
   })
-  if (!found) {
-    res.status(400).json('Sorry, not found!');
-  }
+  // if (!found) {
+  //   res.status(400).json('Sorry, not found!');
+  // }
 })
 
 app.put('/image', (req, res) => {

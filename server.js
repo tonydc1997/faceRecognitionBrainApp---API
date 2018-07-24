@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const knex = require('knex');
 
-const postgres = knex({
+const db = knex({
   client: 'pg',
   connection: {
     host : '127.0.0.1',
@@ -11,10 +11,6 @@ const postgres = knex({
     password : '',
     database : 'smart-brain'
   }
-});
-
-postgres.select('*').from('users').then(data => {
-  console.log(data); 
 });
 
 const app = express();
@@ -58,13 +54,11 @@ app.post('/signIn', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { name, email, password } = req.body;
-  database.users.push({
-    id: '003',
+  db('users').insert({
     name: name,
     email: email,
-    entries: 0,
     joined: new Date()
-  })
+  }).then(console.log)
   res.json(database.users[database.users.length-1]);
 })
 

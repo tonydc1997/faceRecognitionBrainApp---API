@@ -71,11 +71,13 @@ app.get('/profile/:id', (req, res) => {
   const { id } = req.params;
   db.select('*').from('users').where({id})
     .then(user => {
-    res.json(user[0]);
-  })
-  // if (!found) {
-  //   res.status(400).json('Sorry, not found!');
-  // }
+      if (user.length) {
+        res.json(user[0]);
+      } else {
+        res.status(400).json('Sorry! Not found.')
+      }
+    })
+    .catch(err => res.status(400).json('Sorry! There was a problem getting the user'))
 })
 
 app.put('/image', (req, res) => {

@@ -54,6 +54,7 @@ app.post('/signIn', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { name, email, password } = req.body;
+  const hash = bcrypt.hashSync(password);
   db('users')
     .returning('*')
     .insert({

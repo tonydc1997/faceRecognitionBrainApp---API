@@ -63,18 +63,17 @@ app.post('/register', (req, res) => {
       .into('login')
       .returning('email')
       .then(loginEmail => {
-        
+        return trx('users')
+          .returning('*')
+          .insert({
+            name: name,
+            email: email,
+            joined: new Date()
+          })
+          .then(user => {
+            res.json(user[0]);
+          })
       })
-    })
-  return db('users')
-    .returning('*')
-    .insert({
-      name: name,
-      email: email,
-      joined: new Date()
-    })
-    .then(user => {
-      res.json(user[0]);
     })
     .catch(err => res.status(400).json('Sorry! Unable to register.'))
 })

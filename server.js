@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
 
@@ -74,6 +75,8 @@ app.post('/register', (req, res) => {
             res.json(user[0]);
           })
       })
+      .then(trx.commit)
+      .catch(trx.rollback)
     })
     .catch(err => res.status(400).json('Sorry! Unable to register.'))
 })

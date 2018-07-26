@@ -1,4 +1,4 @@
-(req, res) => {
+ const handleSignIn = (req, res, db, bcrypt) => {
   const { email, password } = req.body;
   db.select('email', 'hash').from('login')
     .where('email', '=', email)
@@ -16,4 +16,8 @@
       }
     })
     .catch(err => res.status(400).json("Wrong credentials")) 
+}
+
+module.exports = {
+  handleSignIn: handleSignIn
 }

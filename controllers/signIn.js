@@ -19,5 +19,5 @@
 }
 
 module.exports = {
-  handleSignIn: handleSignIn
+  handleSignIn
 }

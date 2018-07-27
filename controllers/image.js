@@ -1,3 +1,12 @@
+const clarifai = require('clarifai');
+
+const app = new Clarifai.App({
+  apiKey: 'YOUR_API_KEY'
+ });
+
+ app.models
+  .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+
 const handleImage = (req, res, db) => {
   const { id } = req.body;
   db('users').where('id', '=', id)

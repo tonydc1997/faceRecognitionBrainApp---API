@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+  # BackEnd API
   smartbrain-api:
     container_name: backend
     build: ./
@@ -10,3 +11,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/usr/src/smartBrain-api
+
+
+  # Postgres
+  

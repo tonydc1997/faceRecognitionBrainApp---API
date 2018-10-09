@@ -7,6 +7,13 @@ services:
     build: ./
     command: npm start
     working_dir: /usr/src/smartBrain-api
+    environment: 
+      POSTGRES_USER: joe
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    links:
+      - postgres
     ports: 
       - "3000:3000"
     volumes:

@@ -12,12 +12,14 @@ const image = require('./controllers/image');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-    docker: process.env.POSTGRES_URI
-  }
+  connection: process.env.POSTGRES_URI
+  // For Heroku
+    // {
+    // connectionString: process.env.DATABASE_URL,
+    // ssl: true,
+  // }
 });
+console.log(process.env.POSTGRES_URI);
 
 const app = express();
 const PORT = process.env.PORT;

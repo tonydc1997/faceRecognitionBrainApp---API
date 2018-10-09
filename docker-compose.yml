@@ -22,6 +22,11 @@ services:
 
   # Postgres
   postgres:
+    environment: 
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: joe
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
     container_name: postgres
     image: postgres
     ports:

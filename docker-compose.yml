@@ -8,10 +8,10 @@ services:
     command: npm start
     working_dir: /usr/src/smartBrain-api
     environment: 
+      POSTGRES_HOST: postgres
       POSTGRES_USER: joe
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: smart-brain-docker
-      POSTGRES_HOST: postgres
     links:
       - postgres
     ports: 

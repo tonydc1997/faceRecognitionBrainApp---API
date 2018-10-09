@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  smartBrain-api:
+  smartbrain-api:
     container_name: backend
     build: ./
     command: npm start

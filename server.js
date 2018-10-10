@@ -19,7 +19,6 @@ const db = knex({
     // ssl: true,
   // }
 });
-console.log(process.env.POSTGRES_URI);
 
 const app = express();
 const PORT = process.env.PORT;

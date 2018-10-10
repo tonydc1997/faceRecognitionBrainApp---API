@@ -1,3 +1,3 @@
 -- Deploy fresh database tables
-
-\i -- Executes scripts
+\i '/docker-entrypoint-initdb.d/tables/users.sql' 
+\i '/docker-entrypoint-initdb.d/tables/login.sql

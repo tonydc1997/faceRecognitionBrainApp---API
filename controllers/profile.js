@@ -14,6 +14,16 @@ const handleProfileGet = (req, res, db) => {
 const handleProfileUpdate = (req, res, db) => {
   const { id } = req. params;
   const { name, age, book } = req.body.formInput;
+  db('users')
+    .where({ id: id })
+    .where({ name: name })
+    .then(resp => {
+      if (resp) {
+        res.json('Success!');
+      } else {
+        res.status(400).json('Unable to update');
+      }
+    })
 }
 
 module.exports = {

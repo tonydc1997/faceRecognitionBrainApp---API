@@ -11,6 +11,11 @@ const handleProfileGet = (req, res, db) => {
     .catch(err => res.status(400).json('Sorry! There was a problem getting the user'))
 }
 
+const handleProfileUpdate = (req, res, db) => {
+  const { id } = req. params;
+  const { name, age, book } = req.body.formInput;
+}
+
 module.exports = {
   handleProfileGet
 }

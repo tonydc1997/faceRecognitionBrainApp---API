@@ -3,7 +3,7 @@
   if (!email || !password) {
     return Promise.reject("Sorry, incorrect form submission");
   }
-  db.select('email', 'hash').from('login')
+  return db.select('email', 'hash').from('login')
     .where('email', '=', email)
     .then(data => {
       const isValid = bcrypt.compareSync(password, data[0].hash); 

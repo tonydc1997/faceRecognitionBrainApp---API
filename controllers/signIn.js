@@ -26,13 +26,14 @@ const getAuthTokenId = () => {
 }
 
 const signToken = (email) => {
-
+  const jwtPayload = { id };
+  return jwt.sign(jwtPayload, 'JWT_Secret', { expiresIn: '2 days' });
 }
 
 const createSessions = (user) => {
   // Create JWT Token, return user data
   const { id, email } = user;
-  const token = signToken(email);
+  const token = signToken(id);
 }
 
 const signInAuthentication = (req, res, db, bcrypt) => {

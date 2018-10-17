@@ -21,6 +21,10 @@
     .catch(err => res.status(400).json("Wrong credentials")) 
 }
 
+const getAuthTokenId = () => {
+  console.log('auth is A-OK');
+}
+
 const signInAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
   return authorization ?

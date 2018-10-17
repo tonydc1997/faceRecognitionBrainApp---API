@@ -16,7 +16,7 @@ const handleProfileUpdate = (req, res, db) => {
   const { name, age, book } = req.body.formInput;
   db('users')
     .where({ id: id })
-    .where({ name: name })
+    .update({ name: name })
     .then(resp => {
       if (resp) {
         res.json('Success!');

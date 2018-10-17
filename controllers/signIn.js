@@ -1,4 +1,6 @@
- const handleSignIn = (req, res, db, bcrypt) => {
+const jwt = require('jsonwebtoken');
+
+const handleSignIn = (req, res, db, bcrypt) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return Promise.reject("Sorry, incorrect form submission");

@@ -21,6 +21,11 @@
     .catch(err => res.status(400).json("Wrong credentials")) 
 }
 
+const signInAuthentication = (req, res, db, bcrypt) => {
+  
+}
+
 module.exports = {
-  handleSignIn
+  handleSignIn,
+  signInAuthentication
 }

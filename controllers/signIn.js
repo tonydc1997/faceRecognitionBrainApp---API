@@ -27,7 +27,10 @@ const signInAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId() :
     handleSignIn(req, res, db, bcrypt)
-      .then(data => res.json(data))
+      .then(data => {
+        data.id && data.email ? createSessions(data) :
+          Promise.reject(data);
+      })
       .catch(err => res.status(400).json(err));
 }
 

@@ -23,6 +23,10 @@ const getAuthTokenId = () => {
   console.log('auth is A-OK');
 }
 
+const createSessions = (user) => {
+  // Create JWT Token, return user data
+}
+
 const signInAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId() :

@@ -25,6 +25,10 @@ const getAuthTokenId = () => {
   console.log('auth is A-OK');
 }
 
+const signToken = (email) => {
+
+}
+
 const createSessions = (user) => {
   // Create JWT Token, return user data
   const { id, email } = user;

@@ -29,7 +29,9 @@ const signInAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
   return authorization ?
     getAuthTokenId() :
-    handleSignIn(db, bcrypt, req, res);
+    handleSignIn(db, bcrypt, req, res)
+      .then(data => res.json(data))
+      .catch(err => res.status(400).json(err));
 }
 
 module.exports = {

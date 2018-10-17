@@ -11,12 +11,12 @@
         return db.select('*').from('users')
           .where('email', '=', email)
           .then(user => user[0])
-          .catch(err => res.status(400).json("Unable to get user"))
+          .catch(err => Promise.reject("Unable to get user"))
       } else {
-        res.status(400).json("Wrong credentials");
+        Promise.reject("Wrong credentials");
       }
     })
-    .catch(err => res.status(400).json("Wrong credentials")) 
+    .catch(err => Promise.reject("Wrong credentials")) 
 }
 
 const getAuthTokenId = () => {

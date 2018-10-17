@@ -27,7 +27,7 @@ const getAuthTokenId = () => {
 
 const signToken = (email) => {
   const jwtPayload = { id };
-  return jwt.sign(jwtPayload, 'JWT_Secret', { expiresIn: '2 days' });
+  return jwt.sign(jwtPayload, process.env.JWT_S, { expiresIn: '2 days' });
 }
 
 const createSessions = (user) => {

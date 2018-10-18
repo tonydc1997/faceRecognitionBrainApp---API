@@ -25,7 +25,7 @@ const getAuthTokenId = () => {
   console.log('auth is A-OK');
 }
 
-const signToken = (email) => {
+const signToken = (id) => {
   const jwtPayload = { id };
   return jwt.sign(jwtPayload, process.env.JWT_S, { expiresIn: '2 days' });
 }

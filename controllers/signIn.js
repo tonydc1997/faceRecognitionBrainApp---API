@@ -33,6 +33,10 @@ const signToken = (id) => {
   return jwt.sign(jwtPayload, process.env.JWT_S, { expiresIn: '2 days' });
 }
 
+const setToken = (token, id) => {
+  return Promise.resolve(redisClient.set(token, id));
+}
+
 const createSessions = (user) => {
   // Create JWT Token, return user data
   const { id, email } = user;

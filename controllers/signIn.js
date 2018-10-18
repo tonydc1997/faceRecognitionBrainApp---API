@@ -26,6 +26,11 @@ const handleSignIn = (req, res, db, bcrypt) => {
 
 const getAuthTokenId = (req, res) => {
   const { authorization } = req.headers;
+  redisClient.get(authorization, (err, reply) => {
+    if (err || !reply) {
+      return res.status(400).json("Unauthorized.");
+    }
+  })
 }
 
 const signToken = (id) => {

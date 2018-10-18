@@ -24,8 +24,8 @@ const handleSignIn = (req, res, db, bcrypt) => {
     .catch(err => Promise.reject("Wrong credentials")) 
 }
 
-const getAuthTokenId = () => {
-  console.log('auth is A-OK');
+const getAuthTokenId = (req, res) => {
+  const { authorization } = req.headers;
 }
 
 const signToken = (id) => {
@@ -51,7 +51,7 @@ const createSessions = (user) => {
 
 const signInAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
-  return authorization ? getAuthTokenId() :
+  return authorization ? getAuthTokenId(req, res) :
     handleSignIn(req, res, db, bcrypt)
       .then(data => {
         return data.id && data.email ? createSessions(data) :

@@ -26,3 +26,11 @@ services:
     build: ./postgres
     ports:
       - "5432:5432"
+
+  # Redis
+  redis:
+    container_name: redis
+    build: ./redis
+    ports:
+      - "3001: 3001"
+      

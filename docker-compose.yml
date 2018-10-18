@@ -30,8 +30,7 @@ services:
   # Redis
   redis:
     container_name: redis
-    build: ./redis
-    command: src/redis-server
+    image: redis
     ports:
-      - "3001: 3001"
+      - "6379: 6379"
       

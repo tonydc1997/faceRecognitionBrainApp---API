@@ -42,9 +42,10 @@ const signInAuthentication = (req, res, db, bcrypt) => {
   return authorization ? getAuthTokenId() :
     handleSignIn(req, res, db, bcrypt)
       .then(data => {
-        data.id && data.email ? createSessions(data) :
+        return data.id && data.email ? createSessions(data) :
           Promise.reject(data);
       })
+      .then(session => res.json(session))
       .catch(err => res.status(400).json(err));
 }
 

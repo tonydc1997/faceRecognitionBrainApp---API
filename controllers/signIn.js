@@ -33,8 +33,8 @@ const signToken = (id) => {
   return jwt.sign(jwtPayload, process.env.JWT_S, { expiresIn: '2 days' });
 }
 
-const setToken = (token, id) => {
-  return Promise.resolve(redisClient.set(token, id));
+const setToken = (key, value) => {
+  return Promise.resolve(redisClient.set(key, value));
 }
 
 const createSessions = (user) => {

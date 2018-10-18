@@ -10,6 +10,9 @@ services:
     environment: 
       POSTGRES_URI: postgres://joe:secret@postgres:5432/smart-brain-docker
       REDIS_URI: redis://redis:6379
+    links:
+      - postgres
+      - redis
     ports: 
       - "3000:3000"
     volumes:

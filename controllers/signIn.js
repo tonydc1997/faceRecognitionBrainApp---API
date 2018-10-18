@@ -34,6 +34,7 @@ const createSessions = (user) => {
   // Create JWT Token, return user data
   const { id, email } = user;
   const token = signToken(id);
+  return { success: 'true', userId: id, token: token }
 }
 
 const signInAuthentication = (req, res, db, bcrypt) => {

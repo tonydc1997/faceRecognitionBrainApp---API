@@ -10,6 +10,7 @@ const signIn = require('./controllers/signIn');
 const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
+const auth = require('./middleware/authorization');
 
 const db = knex({
   client: 'pg',

@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js, json, md}": [
+      "eslint --fix src", "git add"
+    ]
   },
   "keywords": [],
   "author": "",

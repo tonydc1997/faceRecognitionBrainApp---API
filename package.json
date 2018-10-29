@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "precommit": "lint-staged"
+    "start": "nodemon server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "src/**/*.{js, json, md}": [
-      "eslint --fix src", "git add"
+      "eslint --fix src",
+      "git add"
     ]
   },
   "keywords": [],

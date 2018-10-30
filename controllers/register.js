@@ -7,7 +7,7 @@ const createSessions = require('../controllers/signIn').createSessions;
 const handleRegister = (req, res, db, bcrypt) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-    return res.status(400).json('Sorry, incorrect form submission');
+    return Promise.reject('Sorry, incorrect form submission');
   }
   const hash = bcrypt.hashSync(password);
   return db.transaction(trx => {
@@ -29,7 +29,7 @@ const handleRegister = (req, res, db, bcrypt) => {
       })
       .then(trx.commit)
       .catch(trx.rollback);
-  }).catch(err => res.status(400).json('Sorry! Unable to register.'));
+  }).catch(err => Promise.reject('Sorry! Unable to register.'));
 };
 
 const registerAuthentication = (req, res, db, bcrypt) => {

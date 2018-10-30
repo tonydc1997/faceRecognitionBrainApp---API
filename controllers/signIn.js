@@ -71,7 +71,5 @@ module.exports = {
   signInAuthentication, 
   redisClient, 
   getAuthTokenId,
-  signToken,
-  setToken,
   createSessions
 }

@@ -1,3 +1,9 @@
+const redisClient = require('../controllers/signIn').redisClient;
+const getAuthTokenId = require('../controllers/signIn').getAuthTokenId;
+const signToken = require('../controllers/signIn').signToken;
+const setToken = require('../controllers/signIn').setToken;
+const createSessions = require('../controllers/signIn').createSessions;
+
 const handleRegister = (req, res, db, bcrypt) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {

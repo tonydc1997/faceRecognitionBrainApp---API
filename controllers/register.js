@@ -37,7 +37,8 @@ const handleRegister = (req, res, db, bcrypt) => {
 const registerAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId(req, res)
-    : handleRegister(req, res, db, bcrypt).then(data => {
+    : handleRegister(req, res, db, bcrypt)
+        .then(data => {
           return data.id && data.email ? createSessions(data)
             : Promise.reject(data);
         })

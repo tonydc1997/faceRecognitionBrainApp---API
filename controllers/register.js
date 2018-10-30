@@ -46,5 +46,5 @@ const registerAuthentication = (req, res, db, bcrypt) => {
 };
 
 module.exports = {
-  handleRegister,
+  registerAuthentication,
 };

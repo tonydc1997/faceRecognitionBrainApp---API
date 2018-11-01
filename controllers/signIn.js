@@ -47,7 +47,7 @@ const setToken = (key, value) => {
 
 const createSessions = user => {
   // Create JWT Token, return user data
-  const { id, email } = user;
+  const { id } = user;
   const token = signToken(id);
   return setToken(token, id)
     .then(() => {

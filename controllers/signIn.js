@@ -47,6 +47,9 @@ const setToken = (key, value) => {
 
 const createSessions = user => {
   // Create JWT Token, return user data
+  const errorLog = err => {
+    console.log(err);
+  };
   const { id } = user;
   const token = signToken(id);
   return setToken(token, id)
@@ -57,7 +60,7 @@ const createSessions = user => {
         token,
       };
     })
-    .catch(console.log);
+    .catch(errorLog);
 };
 
 const signInAuthentication = (req, res, db, bcrypt) => {

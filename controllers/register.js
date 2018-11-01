@@ -7,8 +7,10 @@ const handleRegister = (req, res, db, bcrypt) => {
     return Promise.reject('Sorry, incorrect form submission');
   }
   const hash = bcrypt.hashSync(password);
-  return db.transaction(trx => {
-      trx.insert({
+  return db
+    .transaction(trx => {
+      trx
+        .insert({
           hash,
           email,
         })
@@ -32,10 +34,12 @@ const handleRegister = (req, res, db, bcrypt) => {
 
 const registerAuthentication = (req, res, db, bcrypt) => {
   const { authorization } = req.headers;
-  return authorization ? getAuthTokenId(req, res)
+  return authorization
+    ? getAuthTokenId(req, res)
     : handleRegister(req, res, db, bcrypt)
         .then(data => {
-          return data.id && data.email ? createSessions(data)
+          return data.id && data.email
+            ? createSessions(data)
             : Promise.reject(data);
         })
         .then(session => res.json(session))

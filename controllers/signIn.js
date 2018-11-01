@@ -21,8 +21,6 @@ const handleSignIn = (req, res, db, bcrypt) => {
           .where('email', '=', email)
           .then(user => user[0])
           .catch(err => Promise.reject('Unable to get user'));
-      } else {
-        Promise.reject('Wrong credentials');
       }
     })
     .catch(err => Promise.reject('Wrong credentials'));

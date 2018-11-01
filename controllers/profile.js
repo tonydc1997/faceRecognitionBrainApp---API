@@ -1,5 +1,8 @@
 const handleProfileGet = (req, res, db) => {
   const { id } = req.params;
+  const errorResponse = err => {
+    res.status(400).json('Sorry! Something went wrong');
+  };
   db.select('*')
     .from('users')
     .where({ id })
@@ -7,15 +10,18 @@ const handleProfileGet = (req, res, db) => {
       if (user.length) {
         res.json(user[0]);
       } else {
-        res.status(400).json('Sorry! Not found.');
+        errorResponse;
       }
     })
-    .catch(err => res.status(400).json('Sorry! There was a problem getting the user'));
+    .catch(errorResponse);
 };
 
 const handleProfileUpdate = (req, res, db) => {
   const { id } = req.params;
   const { name, age, book } = req.body.formInput;
+  const errorResponse = err => {
+    res.status(400).json('There was an update error');
+  };
   db('users')
     .where({ id })
     .update({ name, age, book })
@@ -23,10 +29,10 @@ const handleProfileUpdate = (req, res, db) => {
       if (resp) {
         res.json('Success!');
       } else {
-        res.status(400).json('Unable to update');
+        errorResponse;
       }
     })
-    .catch(err => res.status(400).json('Error updating user'));
+    .catch(errorResponse);
 };
 
 module.exports = {

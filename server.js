@@ -6,6 +6,9 @@ const cors = require('cors');
 const knex = require('knex');
 const morgan = require('morgan');
 
+const redis = require('redis');
+const redisClient = redis.createClient(process.env.REDIS_URI);
+
 const signIn = require('./controllers/signIn');
 const register = require('./controllers/register');
 const profile = require('./controllers/profile');

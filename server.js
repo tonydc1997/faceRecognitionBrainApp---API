@@ -14,7 +14,7 @@ const auth = require('./middleware/authorization');
 
 const db = knex({
   client: 'pg',
-  connection: process.env.POSTGRES_URI
+  connection: process.env.POSTGRES_URI,
   // For Heroku
   // {
   // connectionString: process.env.DATABASE_URL,

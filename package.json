@@ -6,45 +6,34 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js, json, md}": [
-      "eslint --fix src",
-      "git add"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "clarifai": "^2.9.0",
     "cors": "^2.8.4",
-    "dotenv": "^6.1.0",
-    "eslint": "^5.8.0",
+    "dotenv": "^8.1.0",
+    "eslint": "^6.5.1",
     "eslint-plugin-babel": "^5.2.1",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
-    "knex": "^0.15.2",
+    "knex": "^0.19.4",
     "morgan": "^1.9.1",
     "pg": "^7.4.3",
-    "react-scripts": "2.1.3",
+    "react-scripts": "3.2.0",
     "redis": "^2.8.0"
   },
   "devDependencies": {
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "husky": "^1.1.2",
-    "lint-staged": "^8.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.15.1",
     "nodemon": "^1.18.2",
-    "prettier": "^1.14.3"
+    "prettier": "^1.18.2"
   }
 }

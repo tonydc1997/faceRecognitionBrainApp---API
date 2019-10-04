@@ -6,22 +6,10 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js, json, md}": [
-      "eslint --fix src",
-      "git add"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "clarifai": "^2.9.0",
@@ -38,13 +26,6 @@
     "redis": "^2.8.0"
   },
   "devDependencies": {
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "husky": "^1.1.2",
-    "lint-staged": "^8.0.0",
-    "nodemon": "^1.18.2",
-    "prettier": "^1.14.3"
+    "nodemon": "^1.18.2"
   }
 }

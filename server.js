@@ -29,6 +29,11 @@ const db = knex({
   // }
 });
 
+const whitelist = [
+  'https://app-smartbrain.herokuapp.com',
+  'https://powerful-depths-38914.herokuapp.com',
+];
+
 const app = express();
 const PORT = process.env.PORT;
 

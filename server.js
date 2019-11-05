@@ -41,11 +41,12 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204,
+  methods: ['GET', 'PUT', 'POST'],
 };
 
 const app = express();
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 app.use(bodyParser.json());
 app.use(morgan('combined'));

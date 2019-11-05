@@ -49,7 +49,7 @@ const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(morgan('combined'));
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
   res.send('It is working!');

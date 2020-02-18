@@ -1,14 +1,8 @@
 // MSSQL Query Compiler
 // ------
-const inherits = require('inherits');
 const QueryCompiler = require('../../../query/compiler');
 
 const { isEmpty, compact, identity } = require('lodash');
-
-function QueryCompiler_MSSQL(client, builder) {
-  QueryCompiler.call(this, client, builder);
-}
-inherits(QueryCompiler_MSSQL, QueryCompiler);
 
 const components = [
   'columns',
@@ -23,14 +17,17 @@ const components = [
   'offset',
 ];
 
-Object.assign(QueryCompiler_MSSQL.prototype, {
-  _emptyInsertValue: 'default values',
+class QueryCompiler_MSSQL extends QueryCompiler {
+  constructor(client, builder) {
+    super(client, builder);
+    this._emptyInsertValue = 'default values';
+  }
 
   select() {
     const sql = this.with();
     const statements = components.map((component) => this[component](this));
     return sql + compact(statements).join(' ');
-  },
+  }
 
   // Compiles an "insert" query, allowing for multiple
   // inserts using a single query statement.
@@ -79,7 +76,7 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
       sql,
       returning,
     };
-  },
+  }
 
   // Compiles an `update` query, allowing for a return value.
   update() {
@@ -103,7 +100,7 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
         (!returning ? this._returning('rowcount', '@@rowcount') : ''),
       returning: returning || '@@rowcount',
     };
-  },
+  }
 
   // Compiles a `delete` query.
   del() {
@@ -121,11 +118,11 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
         (!returning ? this._returning('rowcount', '@@rowcount') : ''),
       returning: returning || '@@rowcount',
     };
-  },
+  }
 
   // Compiles the columns in the query, specifying if an item was distinct.
   columns() {
-    let distinct = false;
+    let distinctClause = '';
     if (this.onlyUnions()) return '';
     const top = this.top();
     const columns = this.grouped.columns || [];
@@ -134,7 +131,11 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
     if (columns) {
       while (++i < columns.length) {
         const stmt = columns[i];
-        if (stmt.distinct) distinct = true;
+        if (stmt.distinct) distinctClause = 'distinct ';
+        if (stmt.distinctOn) {
+          distinctClause = this.distinctOn(stmt.value);
+          continue;
+        }
         if (stmt.type === 'aggregate') {
           sql.push(...this.aggregate(stmt));
         } else if (stmt.type === 'aggregateRaw') {
@@ -147,12 +148,12 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
     if (sql.length === 0) sql = ['*'];
 
     return (
-      `select ${distinct ? 'distinct ' : ''}` +
+      `select ${distinctClause}` +
       (top ? top + ' ' : '') +
       sql.join(', ') +
       (this.tableName ? ` from ${this.tableName}` : '')
     );
-  },
+  }
 
   _returning(method, value) {
     switch (method) {
@@ -168,23 +169,23 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
       case 'rowcount':
         return value ? ';select @@rowcount' : '';
     }
-  },
+  }
 
   // Compiles a `truncate` query.
   truncate() {
     return `truncate table ${this.tableName}`;
-  },
+  }
 
   forUpdate() {
     // this doesn't work exacltly as it should, one should also mention index while locking
     // https://stackoverflow.com/a/9818448/360060
     return 'with (UPDLOCK)';
-  },
+  }
 
   forShare() {
     // http://www.sqlteam.com/article/introduction-to-locking-in-sql-server
     return 'with (HOLDLOCK)';
-  },
+  }
 
   // Compiles a `columnInfo` query.
   columnInfo() {
@@ -226,18 +227,18 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
         return (column && out[column]) || out;
       },
     };
-  },
+  }
 
   top() {
     const noLimit = !this.single.limit && this.single.limit !== 0;
     const noOffset = !this.single.offset;
     if (noLimit || !noOffset) return '';
     return `top (${this.formatter.parameter(this.single.limit)})`;
-  },
+  }
 
   limit() {
     return '';
-  },
+  }
 
   offset() {
     const noLimit = !this.single.limit && this.single.limit !== 0;
@@ -252,8 +253,8 @@ Object.assign(QueryCompiler_MSSQL.prototype, {
       )} rows only`;
     }
     return offset;
-  },
-});
+  }
+}
 
 // Set the QueryBuilder & QueryCompiler on the client object,
 // in case anyone wants to modify things to suit their own purposes.

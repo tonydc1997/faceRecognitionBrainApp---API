@@ -1,6 +1,5 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
@@ -48,7 +47,7 @@ const corsOptions = {
 const app = express();
 const { PORT } = process.env;
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(morgan('combined'));
 app.use(cors(corsOptions));
 

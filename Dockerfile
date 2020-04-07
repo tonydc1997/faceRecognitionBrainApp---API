@@ -1,4 +1,4 @@
-FROM node:10.11.0-jessie
+FROM node:latest
 
 WORKDIR /usr/src/smartBrain-api
 

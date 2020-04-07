@@ -1,5 +1,4 @@
-const { getAuthTokenId } = require('../controllers/signIn');
-const { createSessions } = require('../controllers/signIn');
+const { getAuthTokenId, createSessions } = require('./signIn');
 
 const handleRegister = (req, res, db, bcrypt) => {
   const { name, email, password } = req.body;

@@ -7,7 +7,7 @@ const handleRegister = (req, res, db, bcrypt) => {
   }
   const hash = bcrypt.hashSync(password);
   return db
-    .transaction((trx) => {
+    .transaction(trx => {
       trx
         .insert({
           hash,
@@ -15,7 +15,7 @@ const handleRegister = (req, res, db, bcrypt) => {
         })
         .into('login')
         .returning('email')
-        .then((loginEmail) => {
+        .then(loginEmail => {
           return trx('users')
             .returning('*')
             .insert({
@@ -23,12 +23,12 @@ const handleRegister = (req, res, db, bcrypt) => {
               email: loginEmail[0],
               joined: new Date(),
             })
-            .then((user) => user[0]);
+            .then(user => user[0]);
         })
         .then(trx.commit)
         .catch(trx.rollback);
     })
-    .catch((err) => Promise.reject('Sorry! Unable to register.'));
+    .catch(err => Promise.reject('Sorry! Unable to register.'));
 };
 
 const registerAuthentication = (req, res, db, bcrypt) => {
@@ -36,13 +36,13 @@ const registerAuthentication = (req, res, db, bcrypt) => {
   return authorization
     ? getAuthTokenId(req, res)
     : handleRegister(req, res, db, bcrypt)
-        .then((data) => {
+        .then(data => {
           return data.id && data.email
             ? createSessions(data)
             : Promise.reject(data);
         })
-        .then((session) => res.json(session))
-        .catch((err) => res.status(400).json(err));
+        .then(session => res.json(session))
+        .catch(err => res.status(400).json(err));
 };
 
 module.exports = {

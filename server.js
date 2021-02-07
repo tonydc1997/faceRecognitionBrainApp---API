@@ -31,6 +31,8 @@ const db = knex({
 const whitelist = [
   'https://app-smartbrain.herokuapp.com',
   'https://powerful-depths-38914.herokuapp.com',
+  'https://powerful-depths-38914.herokuapp.com/signIn',
+  'https://powerful-depths-38914.herokuapp.com/register',
 ];
 const corsOptions = {
   origin(origin, callback) {

@@ -17,7 +17,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^7.6.0",
     "eslint-plugin-babel": "^5.3.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "jsonwebtoken": "^8.3.0",
     "knex": "^0.21.2",
     "morgan": "^1.10.0",
